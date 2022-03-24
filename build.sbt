@@ -1,20 +1,7 @@
 import Dependencies._
 
 ThisBuild / organization := "com.northstarr"
-ThisBuild / scalaVersion := "3.1.1"
-
-ThisBuild / scalacOptions ++=
-  Seq(
-    "-deprecation",
-    "-explain",
-    "-feature",
-    "-language:implicitConversions",
-    "-unchecked",
-    "-Xfatal-warnings",
-    "-Yexplicit-nulls", // experimental (I've seen it cause issues with circe)
-    "-Ykind-projector",
-    "-Ysafe-init", // experimental (I've seen it cause issues with circe)
-  ) ++ Seq("-rewrite", "-indent") ++ Seq("-source", "future-migration")
+ThisBuild / scalaVersion := "2.13.8"
 
 lazy val `alist-api` =
   project
@@ -36,9 +23,21 @@ lazy val commonScalacOptions = Seq(
     (Compile / console / scalacOptions).value,
 )
 
+val ZHTTPVersion = "1.0.0.0-RC25"
+val loggingVersion = "0.5.1"
+
 lazy val dependencies = Seq(
   libraryDependencies ++= Seq(
-    "dev.zio" %% "zio" % "1.0.13"
+    "dev.zio" %% "zio" % "1.0.13",
+    "dev.zio" %% "zio-interop-cats"  % "2.1.4.0",
+    "io.d11" %% "zhttp"      % ZHTTPVersion,
+    "io.d11" %% "zhttp-test" % ZHTTPVersion % Test,
+    "io.scalac" %% "zio-slick-interop" % "0.4",
+    "com.typesafe.slick" %% "slick-hikaricp" % "3.3.3",
+    "com.h2database" % "h2" % "1.4.200",
+    "dev.zio" %% "zio-logging"       % loggingVersion,
+    "dev.zio" %% "zio-logging-slf4j" % loggingVersion,
+    "dev.zio" %% "zio-json" % "0.1.5"
   ),
   libraryDependencies ++= Seq(
     org.scalatest.scalatest,
