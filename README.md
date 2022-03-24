@@ -1,7 +1,7 @@
 
 # ALIST API
 
-A demo todo list api written in Scala with [ZIO](https://zio.dev) and [Slick](https://scala-slick.org)
+A demo todo list api written in Scala with [ZIO](https://zio.dev), [zio-http](https://github.com/dream11/zio-http) and [Slick](https://scala-slick.org)
 
 The app just models CRUD operations and stores the data in an in-memory database
 
